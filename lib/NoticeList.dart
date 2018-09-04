@@ -42,7 +42,7 @@ class _NoticeListPageState extends State<NoticeList>{
     return new BottomNavigationBar(
       onTap: onTabTapped, // new
       currentIndex: _currentIndex, // new
-      type: BottomNavigationBarType.shifting,
+      type: BottomNavigationBarType.fixed,
       items: [
         new BottomNavigationBarItem(
             icon: const Icon(Icons.home),

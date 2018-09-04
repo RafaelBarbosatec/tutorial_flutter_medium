@@ -34,7 +34,7 @@ class Notice extends StatelessWidget{
       child: new Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new FadeInImage.assetNetwork(placeholder: '', image: _img,fit: BoxFit.cover,width: 95.0,height: 95.0,),
+          new Image.network(_img,fit: BoxFit.cover,width: 95.0,height: 95.0),
           _getColumText(_title,_date,_description),
         ],
 
