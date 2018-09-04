@@ -134,8 +134,6 @@ class _NoticeListPageState extends State<NoticeList>{
         itemCount: _categorys.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index){
-
-
           return _buildCategoryItem(index);
         }
     );
