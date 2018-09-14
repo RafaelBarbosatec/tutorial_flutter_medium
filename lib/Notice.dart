@@ -18,15 +18,16 @@ class Notice extends StatelessWidget {
     //Foi adicionado dentro de Container para adicionar margem no item
     return new Container(
       margin: const EdgeInsets.only(
-          left: 10.0, right: 10.0, bottom: 10.0, top: 0.0),
-      child: new InkWell(
-        onTap: showDetail,
-        child: new Material(
+      left: 10.0, right: 10.0, bottom: 10.0, top: 0.0),
+      child: new Material(
           borderRadius: new BorderRadius.circular(6.0),
           elevation: 2.0,
-          child: _getListTile(),
+          child: new InkWell(
+            onTap: showDetail,
+            splashColor: Colors.blue,
+            child: _getListTile(),
+          ),
         ),
-      ),
     );
   }
 

@@ -13,6 +13,9 @@ class NoticeList extends StatefulWidget{
 
 class _NoticeListPageState extends State<NoticeList>{
 
+  List _categorys = new List();
+  var _category_selected = 0;
+
   List _news = new List();
   var repository = new NewsApi();
   var _currentIndex = 0;
@@ -23,7 +26,14 @@ class _NoticeListPageState extends State<NoticeList>{
     return new Scaffold(
       appBar: new AppBar(),
       body: new Container(
-        child: _getListViewWidget(),
+        child: new Column(
+          children: <Widget>[
+            _getListCategory(),
+            new Expanded(
+              child: _getListViewWidget(),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: _getBottomNavigationBa(),
     );
@@ -33,6 +43,7 @@ class _NoticeListPageState extends State<NoticeList>{
   @override
   void initState() {
 
+    setCategorys();
     loadNotices();
 
   }
@@ -103,6 +114,71 @@ class _NoticeListPageState extends State<NoticeList>{
       });
 
     });
+
+  }
+
+  void setCategorys() {
+
+    _categorys.add("Geral");
+    _categorys.add("Esporte");
+    _categorys.add("Tecnologia");
+    _categorys.add("Entretenimento");
+    _categorys.add("Saúde");
+    _categorys.add("Negócios");
+
+  }
+
+  Widget _getListCategory(){
+
+    ListView listCategory = new ListView.builder(
+        itemCount: _categorys.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index){
+          return _buildCategoryItem(index);
+        }
+    );
+
+    return new Container(
+      height: 55.0,
+      child: listCategory,
+    );
+
+  }
+
+  Widget _buildCategoryItem(index){
+
+    return new GestureDetector(
+      onTap: (){
+        onTabCategory(index);
+      },
+      child: new Center(
+        child: new Container(
+          margin: new EdgeInsets.only(left: 10.0),
+          child: new Material(
+            elevation: 2.0,
+            borderRadius: const BorderRadius.all(const Radius.circular(25.0)),
+            child:  new Container(
+              padding: new EdgeInsets.only(left: 12.0,top: 7.0,bottom: 7.0,right: 12.0),
+              color: _category_selected == index ? Colors.blue[800]:Colors.blue[500],
+              child: new Text(_categorys[index],
+                style: new TextStyle(
+                    color: Colors.white),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+  }
+
+  onTabCategory(index){
+
+    setState(() {
+      _category_selected = index;
+    });
+    
+    //Realiza chamada de serviço para atualizar as noticias de acordo com a categoria selecionada
 
   }
 
